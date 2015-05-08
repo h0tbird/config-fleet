@@ -9,13 +9,13 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill marathon
 ExecStartPre=-/usr/bin/docker rm marathon
-ExecStartPre=-/usr/bin/docker pull regi01.demo.lan:5000/marathon:v0.7.5
+ExecStartPre=-/usr/bin/docker pull regi01:5000/marathon:v0.8.1
 ExecStart=/usr/bin/docker run \
     --name marathon \
     -e LIBPROCESS_PORT=9090 \
     -p 8080:8080 \
     -p 9090:9090 \
-    regi01.demo.lan:5000/marathon:v0.7.5 \
+    regi01:5000/marathon:v0.8.1 \
     --master zk://core02:2181/mesos \
     --zk zk://core02:2181/marathon \
     --checkpoint \
