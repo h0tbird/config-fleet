@@ -17,4 +17,4 @@ ExecStop=/usr/bin/docker stop zookeeper
 WantedBy=multi-user.target
 
 [X-Fleet]
-MachineMetadata=host=core02
+MachineMetadata=role=master
