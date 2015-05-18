@@ -21,3 +21,4 @@ WantedBy=multi-user.target
 
 [X-Fleet]
 MachineMetadata=role=master
+X-Conflicts=zookeeper@*.service
