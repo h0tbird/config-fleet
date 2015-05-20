@@ -16,7 +16,7 @@ ExecStart=/usr/bin/docker run \
   --env ZK_SERVER_NUMBER=%i \
   --env ZK_SERVERS=core-1,core-2,core-3 \
   regi01:5000/zookeeper:latest
-ExecStop=/usr/bin/docker stop zookeeper
+ExecStop=/usr/bin/docker stop zookeeper-%i
 
 [Install]
 WantedBy=multi-user.target
