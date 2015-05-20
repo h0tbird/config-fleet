@@ -12,12 +12,12 @@ ExecStartPre=-/usr/bin/docker rm mesos_slave
 ExecStartPre=-/usr/bin/docker pull regi01:5000/mesos-slave:0.22.1-1.0.ubuntu1404
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --privileged \
-  --name mesos_slave \
-  --net  host \
-  --vol  /sys:/sys \
-  --vol  /usr/bin/docker:/usr/bin/docker:ro \
-  --vol  /var/run/docker.sock:/var/run/docker.sock \
-  --vol  /lib64/libdevmapper.so.1.02:/lib/libdevmapper.so.1.02:ro \
+  --name   mesos_slave \
+  --net    host \
+  --volume /sys:/sys \
+  --volume /usr/bin/docker:/usr/bin/docker:ro \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume /lib64/libdevmapper.so.1.02:/lib/libdevmapper.so.1.02:ro \
   regi01:5000/mesos-slave:0.22.1-1.0.ubuntu1404 \
   --ip=$(/usr/bin/ip -o -4 addr list br0 | grep global | awk \'{print $4}\' | cut -d/ -f1) \
   --containerizers=docker \
