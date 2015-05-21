@@ -10,8 +10,9 @@ ExecStartPre=-/usr/bin/docker kill prometheus
 ExecStartPre=-/usr/bin/docker rm -f prometheus
 ExecStartPre=-/usr/bin/docker pull prom/prometheus
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
-  --name prometheus \
-  --net  host \
+  --name    prometheus \
+  --publish 9191:9090 \
+  --volume  /media/configvirtfs/prometheus/prometheus.conf:/etc/prometheus/prometheus.conf \
   prom/prometheus:latest"
 ExecStop=/usr/bin/docker stop prometheus
 
