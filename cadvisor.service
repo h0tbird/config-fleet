@@ -10,13 +10,12 @@ ExecStartPre=-/usr/bin/docker kill cadvisor
 ExecStartPre=-/usr/bin/docker rm -f cadvisor
 ExecStartPre=-/usr/bin/docker pull google/cadvisor
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
-  --volume=/:/rootfs:ro \
-  --volume=/var/run:/var/run:rw \
-  --volume=/sys:/sys:ro \
-  --volume=/var/lib/docker/:/var/lib/docker:ro \
-  --publish=4194:4194 \
-  --name=cadvisor \
-  --net=host \
+  --name   cadvisor \
+  --volume /:/rootfs:ro \
+  --volume /var/run:/var/run:rw \
+  --volume /sys:/sys:ro \
+  --volume /var/lib/docker/:/var/lib/docker:ro \
+  --net    host \
   google/cadvisor:latest \
   --logtostderr \
   --port=4194"
