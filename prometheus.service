@@ -1,0 +1,23 @@
+[Unit]
+Description=Prometheus Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+TimeoutStartSec=10m
+ExecStartPre=-/usr/bin/docker kill prometheus
+ExecStartPre=-/usr/bin/docker rm -f prometheus
+ExecStartPre=-/usr/bin/docker pull prom/prometheus
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+  --name prometheus \
+  --net  host \
+  prom/prometheus:latest"
+ExecStop=/usr/bin/docker stop prometheus
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+MachineMetadata=role=master
