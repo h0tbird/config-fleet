@@ -1,4 +1,4 @@
-[Unit]
+g:f851/11ff/12ff/13ff[>85;95;0cUnit]
 Description=Marathon
 After=docker.service
 Requires=docker.service
@@ -9,7 +9,7 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill marathon
 ExecStartPre=-/usr/bin/docker rm marathon
-ExecStartPre=-/usr/bin/docker pull regi01:5000/marathon:v0.8.1
+ExecStartPre=-/usr/bin/docker pull regi01:5000/marathon:v0.8.2
 ExecStart=/usr/bin/docker run \
   --name marathon \
   --net  host \
