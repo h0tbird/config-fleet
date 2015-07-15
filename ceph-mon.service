@@ -1,0 +1,34 @@
+[Unit]
+Description=Ceph monitor
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+
+ExecStartPre=-/usr/bin/docker kill ceph_mon
+ExecStartPre=-/usr/bin/docker rm ceph_mon
+ExecStartPre=-/usr/bin/docker pull ceph/daemon
+ExecStartPre=/media/configvirtfs/ceph/populate_etcd
+
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+  --net=host \
+  --name=ceph_mon \
+  --volume /var/lib/ceph:/var/lib/ceph \
+  --env CLUSTER='ceph' \
+  --env MON_IP=$(hostname -i) \
+  --env CEPH_PUBLIC_NETWORK=172.16.0.0/21 \
+  --env KV_TYPE=etcd \
+  --env KV_IP=127.0.0.1 \
+  ceph/daemon mon"
+
+ExecStop=/usr/bin/docker stop ceph_mon
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+MachineMetadata=role=master
