@@ -19,10 +19,15 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --volume /var/lib/ceph:/var/lib/ceph \
   --env CLUSTER='ceph' \
   --env MON_IP=$(hostname -i) \
+  --env MON_NAME=$(hostname -s) \
   --env CEPH_PUBLIC_NETWORK=172.16.0.0/21 \
   --env KV_TYPE=etcd \
   --env KV_IP=127.0.0.1 \
   ceph/daemon mon"
+
+ExecStartPost=/usr/bin/sh -c "/usr/bin/sleep 10; \
+/usr/bin/docker exec \
+ceph_mon ceph mon getmap -o /etc/ceph/monmap"
 
 ExecStop=/usr/bin/docker stop ceph_mon
 
