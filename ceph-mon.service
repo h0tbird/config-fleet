@@ -25,10 +25,9 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --env KV_IP=127.0.0.1 \
   ceph/daemon mon"
 
-ExecStartPost=/usr/bin/sh -c "/usr/bin/sleep 20; \
-/usr/bin/docker exec \
+ExecStartPost=/usr/bin/sleep 30
+ExecStartPost=/usr/bin/sh -c "/usr/bin/docker exec \
 ceph_mon ceph mon getmap -o /etc/ceph/monmap"
-
 ExecStop=/usr/bin/docker stop ceph_mon
 
 [Install]
