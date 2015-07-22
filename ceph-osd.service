@@ -1,0 +1,35 @@
+[Unit]
+Description=Ceph OSD
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+
+ExecStartPre=-/usr/bin/docker kill ceph_osd
+ExecStartPre=-/usr/bin/docker rm ceph_osd
+ExecStartPre=-/usr/bin/docker pull ceph/daemon
+
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+  --privileged=true \
+  --net=host \
+  --name=ceph_osd \
+  --volume /var/lib/ceph:/var/lib/ceph \
+  --volume /dev:/dev \
+  --env CLUSTER='ceph' \
+  --env OSD_DEVICE=/dev/sda \
+  --env OSD_FORCE_ZAP=1 \
+  --env KV_TYPE=etcd \
+  --env KV_IP=127.0.0.1 \
+  ceph/daemon osd_ceph_disk"
+
+ExecStop=/usr/bin/docker stop ceph_osd
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+MachineMetadata=role=slave
