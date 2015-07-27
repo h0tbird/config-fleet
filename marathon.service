@@ -9,7 +9,7 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill marathon
 ExecStartPre=-/usr/bin/docker rm marathon
-ExecStartPre=-/usr/bin/docker pull regi01:5000/marathon:v0.8.2
+ExecStartPre=-/usr/bin/docker pull regi01:5000/mesosphere/marathon:v0.9.0
 ExecStart=/usr/bin/docker run \
   --name marathon \
   --net  host \
