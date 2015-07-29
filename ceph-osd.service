@@ -23,7 +23,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --env OSD_FORCE_ZAP=1 \
   --env KV_TYPE=etcd \
   --env KV_IP=127.0.0.1 \
-  ceph/daemon osd_ceph_disk"
+  ceph/daemon osd"
 
 ExecStop=/usr/bin/docker stop ceph_osd
 
