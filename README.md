@@ -6,3 +6,4 @@
 - Marathon
 - CAdvisor
 - Prometheus
+- Ceph
