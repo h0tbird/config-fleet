@@ -1,4 +1,4 @@
-g:f851/11ff/12ff/13ff[>85;95;0cUnit]
+[Unit]
 Description=Marathon
 After=docker.service
 Requires=docker.service
