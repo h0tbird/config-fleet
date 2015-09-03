@@ -23,6 +23,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --env CEPH_PUBLIC_NETWORK=172.16.0.0/21 \
   --env KV_TYPE=etcd \
   --env KV_IP=127.0.0.1 \
+  --env KV_PORT=2379 \
   ceph/daemon mon"
 
 ExecStartPost=/usr/bin/sleep 30
