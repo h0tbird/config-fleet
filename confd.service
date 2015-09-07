@@ -12,6 +12,7 @@ ExecStartPre=-/usr/bin/docker pull h0tbird/confd
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --name   confd \
   --net    host \
+  --volume /etc/hosts:/etc/hosts \
   --volume /media/configvirtfs/confd:/etc/confd \
   h0tbird/confd:latest"
 ExecStop=/usr/bin/docker stop confd
