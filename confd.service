@@ -1,0 +1,22 @@
+[Unit]
+Description=Confd lightweight configuration management tool
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+TimeoutStartSec=10m
+ExecStartPre=-/usr/bin/docker kill confd
+ExecStartPre=-/usr/bin/docker rm -f confd
+ExecStartPre=-/usr/bin/docker pull h0tbird/confd
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+  --name    confd \
+  --volume  /media/configvirtfs/confd:/etc/confd \
+  h0tbird/confd:latest"
+ExecStop=/usr/bin/docker stop confd
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
