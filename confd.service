@@ -10,11 +10,11 @@ ExecStartPre=-/usr/bin/docker kill confd
 ExecStartPre=-/usr/bin/docker rm -f confd
 ExecStartPre=-/usr/bin/docker pull h0tbird/confd
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
-  --name   confd \
-  --net    host \
-  --volume /etc/hosts:/etc/hosts \
-  --volume /media/configvirtfs/confd:/etc/confd \
-  --volume /media/configvirtfs/prometheus:/etc/prometheus \
+  --name         confd \
+  --net          host \
+  --volume       /etc/hosts:/etc/hosts \
+  --volume       /media/configvirtfs/confd:/etc/confd \
+  --volumes-from prometheus \
   h0tbird/confd:latest"
 ExecStop=/usr/bin/docker stop confd
 
