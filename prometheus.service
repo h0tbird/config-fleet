@@ -13,7 +13,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --name    prometheus \
   --publish 9191:9090 \
   --volume  /media/configvirtfs/prometheus:/etc/prometheus \
-  --volume  /etc/prometheus/targets \
+  --volume  /etc/sd-targets \
   prom/prometheus:latest"
 ExecStop=/usr/bin/docker stop prometheus
 
