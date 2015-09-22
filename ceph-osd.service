@@ -17,6 +17,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --net=host \
   --name=ceph_osd \
   --volume /var/lib/ceph:/var/lib/ceph \
+  --volume /etc/ceph:/etc/ceph \
   --volume /dev:/dev \
   --env CLUSTER='ceph' \
   --env OSD_DEVICE=/dev/sda \

@@ -17,6 +17,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --net=host \
   --name=ceph_mon \
   --volume /var/lib/ceph:/var/lib/ceph \
+  --volume /etc/ceph:/etc/ceph \
   --env CLUSTER='ceph' \
   --env MON_IP=$(hostname -i) \
   --env MON_NAME=$(hostname -s) \
