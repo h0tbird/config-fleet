@@ -20,6 +20,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --volume /etc/ceph:/etc/ceph \
   --volume /dev:/dev \
   --env CLUSTER='ceph' \
+  --env CEPH_GET_ADMIN_KEY=1 \
   --env OSD_DEVICE=/dev/sda \
   --env OSD_FORCE_ZAP=1 \
   --env KV_TYPE=etcd \
