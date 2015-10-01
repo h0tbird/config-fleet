@@ -10,7 +10,7 @@ TimeoutStartSec=0
 
 ExecStartPre=-/usr/bin/docker kill ceph_mon
 ExecStartPre=-/usr/bin/docker rm ceph_mon
-ExecStartPre=-/usr/bin/docker pull ceph/daemon
+ExecStartPre=-/usr/bin/docker pull regi01:5000/ceph/daemon:latest
 ExecStartPre=/media/configvirtfs/ceph/populate_etcd
 
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
@@ -25,7 +25,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --env KV_TYPE=etcd \
   --env KV_IP=127.0.0.1 \
   --env KV_PORT=2379 \
-  ceph/daemon mon"
+  regi01:5000/ceph/daemon:latest mon"
 
 ExecStartPost=/usr/bin/sleep 30
 ExecStartPost=/usr/bin/sh -c "/usr/bin/docker exec \

@@ -8,13 +8,13 @@ Restart=always
 TimeoutStartSec=10m
 ExecStartPre=-/usr/bin/docker kill prometheus
 ExecStartPre=-/usr/bin/docker rm -f prometheus
-ExecStartPre=-/usr/bin/docker pull prom/prometheus
+ExecStartPre=-/usr/bin/docker pull regi01:5000/prom/prometheus:0.15.1
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --name    prometheus \
   --publish 9191:9090 \
   --volume  /media/configvirtfs/prometheus:/etc/prometheus \
   --volume  /etc/prometheus/targets:/etc/sd-targets \
-  prom/prometheus"
+  regi01:5000/prom/prometheus:0.15.1"
 ExecStop=/usr/bin/docker stop prometheus
 
 [Install]
