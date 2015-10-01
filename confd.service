@@ -15,7 +15,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --volume /etc/hosts:/etc/hosts \
   --volume /media/configvirtfs/confd:/etc/confd \
   --volume /etc/prometheus/targets:/etc/prometheus/targets \
-  h0tbird/confd:latest"
+  h0tbird/confd"
 ExecStop=/usr/bin/docker stop confd
 
 [Install]

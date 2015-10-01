@@ -16,7 +16,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --volume /sys:/sys:ro \
   --volume /var/lib/docker/:/var/lib/docker:ro \
   --net    host \
-  google/cadvisor:latest \
+  google/cadvisor \
   --logtostderr \
   --port=4194"
 ExecStop=/usr/bin/docker stop -t 2 cadvisor
