@@ -21,7 +21,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --volume /dev:/dev \
   --env CLUSTER='ceph' \
   --env CEPH_GET_ADMIN_KEY=1 \
-  --env OSD_DEVICE=/dev/sda \
+  --env OSD_DEVICE=/dev/sdb \
   --env OSD_FORCE_ZAP=1 \
   --env KV_TYPE=etcd \
   --env KV_IP=127.0.0.1 \
