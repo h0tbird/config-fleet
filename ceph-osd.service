@@ -8,14 +8,14 @@ Restart=on-failure
 RestartSec=20
 TimeoutStartSec=0
 
-ExecStartPre=-/usr/bin/docker kill ceph_osd
-ExecStartPre=-/usr/bin/docker rm ceph_osd
+ExecStartPre=-/usr/bin/docker kill ceph-osd
+ExecStartPre=-/usr/bin/docker rm ceph-osd
 ExecStartPre=-/usr/bin/docker pull regi01:5000/ceph/daemon:latest
 
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --privileged=true \
   --net=host \
-  --name=ceph_osd \
+  --name=ceph-osd \
   --volume /var/lib/ceph:/var/lib/ceph \
   --volume /etc/ceph:/etc/ceph \
   --volume /dev:/dev \
@@ -28,7 +28,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --env KV_PORT=2379 \
   regi01:5000/ceph/daemon:latest osd"
 
-ExecStop=/usr/bin/docker stop ceph_osd
+ExecStop=/usr/bin/docker stop ceph-osd
 
 [Install]
 WantedBy=multi-user.target

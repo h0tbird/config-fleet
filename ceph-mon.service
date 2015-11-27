@@ -8,14 +8,14 @@ Restart=on-failure
 RestartSec=20
 TimeoutStartSec=0
 
-ExecStartPre=-/usr/bin/docker kill ceph_mon
-ExecStartPre=-/usr/bin/docker rm ceph_mon
+ExecStartPre=-/usr/bin/docker kill ceph-mon
+ExecStartPre=-/usr/bin/docker rm ceph-mon
 ExecStartPre=-/usr/bin/docker pull regi01:5000/ceph/daemon:latest
 ExecStartPre=/media/configvirtfs/ceph/populate_etcd
 
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --net=host \
-  --name=ceph_mon \
+  --name=ceph-mon \
   --volume /var/lib/ceph:/var/lib/ceph \
   --volume /etc/ceph:/etc/ceph \
   --env CLUSTER='ceph' \
@@ -29,8 +29,8 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
 
 ExecStartPost=/usr/bin/sleep 30
 ExecStartPost=/usr/bin/sh -c "/usr/bin/docker exec \
-ceph_mon ceph mon getmap -o /etc/ceph/monmap"
-ExecStop=/usr/bin/docker stop ceph_mon
+ceph-mon ceph mon getmap -o /etc/ceph/monmap"
+ExecStop=/usr/bin/docker stop ceph-mon
 
 [Install]
 WantedBy=multi-user.target
