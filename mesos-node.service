@@ -18,6 +18,8 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --volume /usr/bin/docker:/usr/bin/docker:ro \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   --volume /lib64/libdevmapper.so.1.02:/lib/libdevmapper.so.1.02:ro \
+  --volume /lib64/libsystemd.so.0:/lib/libsystemd.so.0:ro \
+  --volume /lib64/libgcrypt.so.20:/lib/libgcrypt.so.20:ro \
   --volume /var/lib/mesos:/var/lib/mesos \
   regi01:5000/mesosphere/mesos-slave:0.25.0-0.2.70.ubuntu1404 \
   --ip=$(/usr/bin/ip -o -4 addr list eth0 | grep global | awk \'{print $4}\' | cut -d/ -f1) \
