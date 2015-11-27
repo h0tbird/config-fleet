@@ -14,7 +14,7 @@ ExecStart=/usr/bin/docker run \
   --net  host \
   --name zookeeper-%i \
   --env ZK_SERVER_NUMBER=%i \
-  --env ZK_SERVERS=core-1,core-2,core-3 \
+  --env ZK_SERVERS=core-1,core-5,core-9 \
   regi01:5000/h0tbird/zookeeper:latest
 ExecStop=/usr/bin/docker stop zookeeper-%i
 
