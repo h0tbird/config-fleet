@@ -1,7 +1,7 @@
 [Unit]
 Description=Prometheus
-After=docker.service ceph-osd.service
-Requires=docker.service ceph-osd.service
+After=docker.service ceph-mon.service
+Requires=docker.service ceph-mon.service
 
 [Service]
 Restart=on-failure
@@ -16,7 +16,7 @@ ExecStart=/usr/bin/docker run \
   --publish 9191:9090 \
   --volume /media/configvirtfs/prometheus:/etc/prometheus \
   --volume /etc/prometheus/targets:/etc/sd-targets \
-  regi01:5000/prom/prometheus:0.16.1"
+  regi01:5000/prom/prometheus:0.16.1
 ExecStop=/usr/bin/docker stop prometheus-%i
 
 [Install]
