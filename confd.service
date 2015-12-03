@@ -8,16 +8,18 @@ Restart=always
 TimeoutStartSec=10m
 ExecStartPre=-/usr/bin/docker kill confd
 ExecStartPre=-/usr/bin/docker rm -f confd
-ExecStartPre=-/usr/bin/docker pull regi01:5000/h0tbird/confd:latest
-ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
-  --name   confd \
-  --net    host \
+ExecStartPre=-/usr/bin/docker pull regi01:5000/h0tbird/confd:v0.11.0-1
+ExecStart=/usr/bin/docker run \
+  --name confd \
+  --net host \
   --volume /etc/hosts:/etc/hosts \
   --volume /etc/resolv-2.conf:/etc/resolv-2.conf \
   --volume /run/systemd/resolve/resolv.conf:/run/systemd/resolve/resolv.conf \
   --volume /media/configvirtfs/confd:/etc/confd \
   --volume /etc/prometheus/targets:/etc/prometheus/targets \
-  regi01:5000/h0tbird/confd:latest"
+  regi01:5000/h0tbird/confd:v0.11.0-1 \
+  -node 127.0.0.1:2379 \
+  -watch
 ExecStop=/usr/bin/docker stop confd
 
 [Install]
