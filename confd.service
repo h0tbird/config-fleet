@@ -13,6 +13,8 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --name   confd \
   --net    host \
   --volume /etc/hosts:/etc/hosts \
+  --volume /etc/resolv-2.conf:/etc/resolv-2.conf \
+  --volume /run/systemd/resolve/resolv.conf:/run/systemd/resolve/resolv.conf \
   --volume /media/configvirtfs/confd:/etc/confd \
   --volume /etc/prometheus/targets:/etc/prometheus/targets \
   regi01:5000/h0tbird/confd:latest"
