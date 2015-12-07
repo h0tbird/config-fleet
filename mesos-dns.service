@@ -16,6 +16,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --net host \
   --env MDNS_ZK=zk://core-1:2181,core-5:2181,core-9:2181/mesos \
   --env MDNS_RESOLVERS=$(cat ${RESOLV_CONF} | awk '/^nameserver/ {print $2; exit}') \
+  --env MDNS_DOMAIN=cell-1.ofi \
   --env KV_TYPE=etcd \
   --env KV_IP=127.0.0.1 \
   --env KV_PORT=2379 \
