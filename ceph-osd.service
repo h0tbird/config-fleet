@@ -10,7 +10,7 @@ TimeoutStartSec=0
 
 ExecStartPre=-/usr/bin/docker kill ceph-osd
 ExecStartPre=-/usr/bin/docker rm ceph-osd
-ExecStartPre=-/usr/bin/docker pull regi01:5000/ceph/daemon:infernalis
+ExecStartPre=-/usr/bin/docker pull regi01:5000/h0tbird/ceph:v9.2.0-2
 
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --privileged=true \
@@ -26,7 +26,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --env KV_TYPE=etcd \
   --env KV_IP=127.0.0.1 \
   --env KV_PORT=2379 \
-  regi01:5000/ceph/daemon:infernalis osd"
+  regi01:5000/h0tbird/ceph:v9.2.0-2 osd"
 
 ExecStop=/usr/bin/docker stop ceph-osd
 
