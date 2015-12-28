@@ -25,7 +25,6 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   regi01:5000/mesosphere/mesos-slave:0.26.0-0.2.145.ubuntu1404 \
   --ip=$(/usr/bin/ip -o -4 addr list eth0 | grep global | awk \'{print $4}\' | cut -d/ -f1) \
   --containerizers=docker \
-  --docker_mesos_image=regi01:5000/mesosphere/mesos-slave:0.26.0-0.2.145.ubuntu1404 \
   --executor_registration_timeout=2mins \
   --master=zk://core-1:2181,core-5:2181,core-9:2181/mesos \
   --work_dir=/var/lib/mesos/node \
