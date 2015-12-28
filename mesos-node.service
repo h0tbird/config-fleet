@@ -12,9 +12,9 @@ ExecStartPre=-/usr/bin/docker rm mesos-node
 ExecStartPre=-/usr/bin/docker pull regi01:5000/mesosphere/mesos-slave:0.26.0-0.2.145.ubuntu1404
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --privileged \
-  --name   mesos-node \
-  --net    host \
-  --pid    host \
+  --name mesos-node \
+  --net host \
+  --pid host \
   --volume /sys:/sys \
   --volume /usr/bin/docker:/usr/bin/docker:ro \
   --volume /var/run/docker.sock:/var/run/docker.sock \
