@@ -1,8 +1,8 @@
 [Unit]
 Description=Mesos Node
-After=docker.service mesos-dns.service
+After=docker.service mesos-dns.service confd.service
+Wants=mesos-dns.service confd.service
 Requires=docker.service
-Wants=mesos-dns.service
 
 [Service]
 Restart=on-failure
