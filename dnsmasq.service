@@ -1,5 +1,5 @@
 [Unit]
-Description=Lightweight caching DNS proxy.
+Description=Lightweight caching DNS proxy
 After=docker.service
 Requires=docker.service
 
@@ -23,3 +23,4 @@ WantedBy=multi-user.target
 
 [X-Fleet]
 Global=true
+MachineMetadata=role=slave
