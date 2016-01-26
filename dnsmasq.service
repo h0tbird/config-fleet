@@ -1,0 +1,25 @@
+[Unit]
+Description=Lightweight caching DNS proxy.
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+TimeoutStartSec=10m
+ExecStartPre=-/usr/bin/docker kill dnsmasq
+ExecStartPre=-/usr/bin/docker rm -f dnsmasq
+ExecStartPre=-/usr/bin/docker pull janeczku/go-dnsmasq:0.9.8
+ExecStart=/usr/bin/docker run \
+  --name dnsmasq \
+  --net host \
+  janeczku/go-dnsmasq:0.9.8 \
+  --default-resolver \
+  --search-domains cell-1.mad.mesos,cell-1.mad.xnood.com \
+  --append-search-domains
+ExecStop=/usr/bin/docker stop dnsmasq
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
