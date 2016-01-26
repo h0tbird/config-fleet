@@ -16,7 +16,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   janeczku/go-dnsmasq:0.9.8 \
   --listen $(hostname -i) \
   --default-resolver \
-  --search-domains cell-1.mad.mesos,$(hostname -d) \
+  --search-domains $(hostname -d | cut -d. -f-2).mesos,$(hostname -d) \
   --append-search-domains"
 ExecStop=/usr/bin/docker stop dnsmasq
 
