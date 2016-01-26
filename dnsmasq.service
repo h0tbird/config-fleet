@@ -12,6 +12,7 @@ ExecStartPre=-/usr/bin/docker pull janeczku/go-dnsmasq:0.9.8
 ExecStart=/usr/bin/docker run \
   --name dnsmasq \
   --net host \
+  --volume /etc/resolv.conf:/etc/resolv.conf \
   janeczku/go-dnsmasq:0.9.8 \
   --default-resolver \
   --search-domains cell-1.mad.mesos,cell-1.mad.xnood.com \
