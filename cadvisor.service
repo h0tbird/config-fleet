@@ -8,7 +8,7 @@ Restart=always
 TimeoutStartSec=10m
 ExecStartPre=-/usr/bin/docker kill cadvisor
 ExecStartPre=-/usr/bin/docker rm -f cadvisor
-ExecStartPre=-/usr/bin/docker pull regi01:5000/google/cadvisor:0.19.3
+ExecStartPre=-/usr/bin/docker pull regi01:5000/google/cadvisor:v0.21.0
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --name   cadvisor \
   --volume /:/rootfs:ro \
@@ -16,7 +16,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --volume /sys:/sys:ro \
   --volume /var/lib/docker/:/var/lib/docker:ro \
   --net    host \
-  regi01:5000/google/cadvisor:0.19.3 \
+  regi01:5000/google/cadvisor:v0.21.0 \
   --logtostderr \
   --port=4194"
 ExecStop=/usr/bin/docker stop -t 2 cadvisor
