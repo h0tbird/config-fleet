@@ -9,14 +9,14 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill prometheus-%i
 ExecStartPre=-/usr/bin/docker rm prometheus-%i
-ExecStartPre=-/usr/bin/docker pull regi01:5000/prom/prometheus:0.16.1
+ExecStartPre=-/usr/bin/docker pull regi01:5000/prom/prometheus:0.16.2
 ExecStartPre=-/usr/bin/docker volume create --driver rbd --name sys-prometheus-%i
 ExecStart=/usr/bin/docker run \
   --name prometheus-%i \
   --publish 9191:9090 \
   --volume /media/configvirtfs/prometheus:/etc/prometheus \
   --volume /etc/prometheus/targets:/etc/sd-targets \
-  regi01:5000/prom/prometheus:0.16.1
+  regi01:5000/prom/prometheus:0.16.2
 ExecStop=/usr/bin/docker stop prometheus-%i
 
 [Install]

@@ -8,13 +8,13 @@ Restart=always
 TimeoutStartSec=10m
 ExecStartPre=-/usr/bin/docker kill prometheus
 ExecStartPre=-/usr/bin/docker rm -f prometheus
-ExecStartPre=-/usr/bin/docker pull regi01:5000/prom/prometheus:0.16.1
+ExecStartPre=-/usr/bin/docker pull regi01:5000/prom/prometheus:0.16.2
 ExecStart=/usr/bin/docker run \
   --name prometheus \
   --net host \
   --volume /media/configvirtfs/prometheus:/etc/prometheus \
   --volume /etc/prometheus/targets:/etc/sd-targets \
-  regi01:5000/prom/prometheus:0.16.1 \
+  regi01:5000/prom/prometheus:0.16.2 \
   -config.file=/etc/prometheus/prometheus.yml \
   -storage.local.path=/prometheus \
   -web.console.libraries=/etc/prometheus/console_libraries \
