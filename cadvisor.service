@@ -1,6 +1,7 @@
 [Unit]
 Description=cAdvisor Service
-After=docker.service
+After=docker.service dnsmasq.service
+Wants=dnsmasq.service
 Requires=docker.service
 
 [Service]
