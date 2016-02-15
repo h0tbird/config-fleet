@@ -17,6 +17,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --net host \
   --pid host \
   --volume /sys:/sys \
+  --volume /etc/resolv.conf:/etc/resolv.conf \
   --volume /usr/bin/docker:/usr/bin/docker:ro \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   --volume /lib64/libdevmapper.so.1.02:/lib/libdevmapper.so.1.02:ro \

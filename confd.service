@@ -1,7 +1,6 @@
 [Unit]
 Description=Confd lightweight configuration management tool
-After=docker.service dnsmasq.service
-Wants=dnsmasq.service
+After=docker.service
 Requires=docker.service
 
 [Service]
