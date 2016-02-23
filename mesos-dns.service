@@ -20,9 +20,12 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
   --name mesos-dns \
   --net host \
   --env MDNS_ZK=zk://core-1:2181,core-5:2181,core-9:2181/mesos \
+  --env MDNS_REFRESHSECONDS=45 \
+  --env MDNS_TTL=45 \
   --env MDNS_RESOLVERS=$(cat ${RESOLV_CONF} | awk '/^nameserver/ {print $2; exit}') \
   --env MDNS_DOMAIN=$(hostname -d | cut -d. -f-2).mesos \
-  regi01:5000/h0tbird/mesos-dns:v0.5.1-4"
+  --env MDNS_IPSOURCE=netinfo \
+  regi01:5000/h0tbird/mesos-dns:v0.5.1-5"
 ExecStop=/usr/bin/docker stop mesos-dns
 ExecStopPost=/usr/bin/ln -fs ..${RESOLV_CONF} /etc/resolv.conf
 
