@@ -9,13 +9,13 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill zookeeper-%i
 ExecStartPre=-/usr/bin/docker rm zookeeper-%i
-ExecStartPre=-/usr/bin/docker pull regi01:5000/h0tbird/zookeeper:latest
+ExecStartPre=-/usr/bin/docker pull regi01:5000/h0tbird/zookeeper:v3.4.8-1
 ExecStart=/usr/bin/docker run \
   --net  host \
   --name zookeeper-%i \
   --env ZK_SERVER_NUMBER=%i \
   --env ZK_SERVERS=core-1,core-5,core-9 \
-  regi01:5000/h0tbird/zookeeper:latest
+  regi01:5000/h0tbird/zookeeper:v3.4.8-1
 ExecStop=/usr/bin/docker stop zookeeper-%i
 
 [Install]
