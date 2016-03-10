@@ -10,17 +10,19 @@ TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill marathon
 ExecStartPre=-/usr/bin/docker rm marathon
 ExecStartPre=-/usr/bin/docker pull regi01:5000/mesosphere/marathon:v0.15.3
-ExecStart=/usr/bin/docker run \
+ExecStart=/usr/bin/sh -c "docker run \
   --name marathon \
   --net host \
+  --env LIBPROCESS_IP=$(hostname -i) \
   --env LIBPROCESS_PORT=9090 \
   --volume /etc/resolv.conf:/etc/resolv.conf \
   regi01:5000/mesosphere/marathon:v0.15.3 \
+  --http_address $(hostname -i) \
   --master zk://core-1:2181,core-5:2181,core-9:2181/mesos \
   --zk zk://core-1:2181,core-5:2181,core-9:2181/marathon \
-  --checkpoint \
-  --task_launch_timeout 240000
-ExecStop=/usr/bin/docker stop marathon
+  --task_launch_timeout 240000 \
+  --checkpoint"
+ExecStop=/usr/bin/docker stop -t 5 marathon
 
 [Install]
 WantedBy=multi-user.target
