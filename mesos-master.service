@@ -10,14 +10,14 @@ TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill mesos-master
 ExecStartPre=-/usr/bin/docker rm mesos-master
 ExecStartPre=-/usr/bin/docker pull regi01:5000/mesosphere/mesos-master:0.27.1-2.0.226.ubuntu1404
-ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+ExecStart=/usr/bin/sh -c "docker run \
   --privileged \
   --name mesos-master \
   --net host \
   --volume /var/lib/mesos:/var/lib/mesos \
   --volume /etc/resolv.conf:/etc/resolv.conf \
   regi01:5000/mesosphere/mesos-master:0.27.1-2.0.226.ubuntu1404 \
-  --ip=$(/usr/bin/ip -o -4 addr list eth0 | grep global | awk \'{print $4}\' | cut -d/ -f1) \
+  --ip=$(hostname -i) \
   --zk=zk://core-1:2181,core-5:2181,core-9:2181/mesos \
   --work_dir=/var/lib/mesos/master \
   --log_dir=/var/log/mesos \
