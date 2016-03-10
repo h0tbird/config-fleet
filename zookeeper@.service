@@ -11,12 +11,19 @@ ExecStartPre=-/usr/bin/docker kill zookeeper-%i
 ExecStartPre=-/usr/bin/docker rm zookeeper-%i
 ExecStartPre=-/usr/bin/docker pull regi01:5000/h0tbird/zookeeper:v3.4.8-1
 ExecStart=/usr/bin/docker run \
-  --net  host \
+  --net host \
   --name zookeeper-%i \
-  --env ZK_SERVER_NUMBER=%i \
+  --env ZK_SERVER_ID=%i \
+  --env ZK_TICK_TIME=2000 \
+  --env ZK_INIT_LIMIT=5 \
+  --env ZK_SYNC_LIMIT=2 \
   --env ZK_SERVERS=core-1,core-5,core-9 \
+  --env ZK_DATA_DIR=/var/lib/zookeeper \
+  --env ZK_CLIENT_PORT=2181 \
+  --env ZK_CLIENT_PORT_ADDRESS=$(hostname -i) \
+  --env JMXDISABLE=true \
   regi01:5000/h0tbird/zookeeper:v3.4.8-1
-ExecStop=/usr/bin/docker stop zookeeper-%i
+ExecStop=/usr/bin/docker stop -t 5 zookeeper-%i
 
 [Install]
 WantedBy=multi-user.target
